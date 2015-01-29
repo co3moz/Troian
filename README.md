@@ -15,7 +15,7 @@ Fast Javascript based template manager
 
 ### How can i use this shit
 ```javascript
-var template = troian.directory(__dirname + '/views/');
+var template = require('troian').directory(__dirname + '/views/');
 ```
 Create variable like this. This will load every files on views folder. Then compiles each of them. If this files change during development system will re-compile file automaticly. 
 ```javascript
@@ -42,7 +42,7 @@ index.troian
 ##### App.js
 ```javascript
 var express = require('express');
-var troian = require(__dirname + '/troian.js');
+var troian = require('troian');
 var app = express();
 
 var template = troian.directory(__dirname + '/views/');
