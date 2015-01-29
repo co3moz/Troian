@@ -29,7 +29,7 @@ If we write some params on it; we can get it from index.troian file as down belo
 template.index(1, "hello");
 ```
 
-##### index.troian
+##### views/index.troian
 ```javascript
 <troian params="number, text">Info or blank .. This text will removed</troian>
 <%
