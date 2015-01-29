@@ -1,19 +1,19 @@
 # Troian
 Fast Javascript based template manager
 
-## How can i install?
+### How can i install?
 npm install troian
 
-## Pros
+### Pros
 * Fast
 * Small
 * Auto-restart when files changes
 * Direct compiling
 
-## Cons
+### Cons
 * When you do something stupid, It will not help you :(
 
-## How can i use this shit
+### How can i use this shit
 ```javascript
 var template = troian.directory(__dirname + '/views/');
 ```
@@ -23,11 +23,13 @@ template.index();
 ```
 `index` is actually file name without `.troian`. And we writed parantheses for function calling. Compiling process will return as a function.
 If we write some params on it; we can get it from index.troian file as down below
+
+app.js
 ```javascript
 template.index(1, "hello");
 ```
 
-troian file
+index.troian
 ```javascript
 <troian params="number, text">Info or blank .. This text will removed</troian>
 <%
@@ -36,12 +38,11 @@ troian file
 %>
 ```
 
-## Express Example
-### App.js
+### Express Example
+##### App.js
 ```javascript
 var express = require('express');
 var troian = require(__dirname + '/troian.js');
-var fs = require('fs');
 var app = express();
 
 var template = troian.directory(__dirname + '/views/');
@@ -55,7 +56,7 @@ app.listen(80, function() {
 });
 ```
 
-### views/index.troian
+##### views/index.troian
 ```html
 <troian title="This is an example">
 	We can give any info here. It will be removed from view.
@@ -80,7 +81,7 @@ app.listen(80, function() {
 </html>
 ```
 
-### views/header.troian
+##### views/header.troian
 ```html
 <troian params="title" myvariable="this is what i want">
 	We can give any info here. It will be removed from view.
