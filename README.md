@@ -99,3 +99,12 @@ app.listen(80, function() {
 	<title><%(title)%></title>
 </head>
 ```
+
+### Added features in other versions
+
+##### compiled tag
+```html
+<troian params="title" compiled="console.log('im now compiled')">
+	We can give any info here. It will be removed from view.
+</troian>
+```
