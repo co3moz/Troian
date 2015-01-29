@@ -35,7 +35,12 @@ template.index(1, "hello");
 <%
   print(number);
   print(text);
+  /*
+  	inline printing is down below
+  */
 %>
+<%( number )%> <br>
+<%(text)%>
 ```
 
 ### Express Example
