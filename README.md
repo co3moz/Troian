@@ -2,7 +2,7 @@
 Fast Javascript based template manager
 
 ### How can i install?
-npm install troian
+	npm install troian
 
 ### Pros
 * Fast
