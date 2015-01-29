@@ -17,7 +17,7 @@ Fast Javascript based template manager
 ```javascript
 var template = require('troian').directory(__dirname + '/views/');
 ```
-Create variable like this. This will load every files on views folder. Then compiles each of them. If this files change during development system will re-compile file automaticly. 
+Create variable like this. This will load every files on views folder. Then compiles each of them. If this files change during development, system will re-compile file automaticly. 
 ```javascript
 template.index();
 ```
