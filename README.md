@@ -13,7 +13,7 @@ Fast Javascript based template manager
 ### Cons
 * When you do something stupid, It will not help you :(
 
-### How can i use this shit
+### How can i use this sh*t
 ```javascript
 var template = require('troian').directory(__dirname + '/views/');
 ```
@@ -100,7 +100,7 @@ app.listen(80, function() {
 </head>
 ```
 
-### Added features in newer versions
+### Other awesome features :D
 
 ##### compiled tag
 ```html
