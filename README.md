@@ -100,7 +100,7 @@ app.listen(80, function() {
 </head>
 ```
 
-### Added features in other versions
+### Added features in newer versions
 
 ##### compiled tag
 ```html
