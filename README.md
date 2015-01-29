@@ -24,12 +24,12 @@ template.index();
 `index` is actually file name without `.troian`. And we writed parantheses for function calling. Compiling process will return as a function.
 If we write some params on it; we can get it from index.troian file as down below
 
-app.js
+##### app.js
 ```javascript
 template.index(1, "hello");
 ```
 
-index.troian
+##### index.troian
 ```javascript
 <troian params="number, text">Info or blank .. This text will removed</troian>
 <%
@@ -39,7 +39,7 @@ index.troian
 ```
 
 ### Express Example
-##### App.js
+##### app.js
 ```javascript
 var express = require('express');
 var troian = require('troian');
