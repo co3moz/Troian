@@ -102,7 +102,61 @@ app.listen(80, function() {
 
 ### Other awesome features :D
 
-##### compiled tag
+##### success option tag and failed option tag
+This option tags can be used as understanding views compiled successfuly or not. 
+If you write return false, it causes process exit. Stops everything.
+If you want to debug all troian files for ones you dont need return false;
+return false can be used in both success and failed option tags..
+```html
+<troian 
+	params="title" 
+	success="console.log('im ready)"
+	failed="console.log('i pissed my self sorry :(. im closing the application'); return false;">
+	We can give any info here. It will be removed from view.
+</troian>
+```
+
+##### static tag
+You can define static operations in troian tag.
+```html
+<troian title="This is an example" 
+		success="return success()"
+		failed="return failed()">
+	We can give any info here. It will be removed from view.
+	<%static
+		function success() {
+			console.log('index has been successfuly compiled');
+		}
+
+		function failed() {
+			console.log('index has been failed at compiling process')
+			return false;
+		}
+
+		console.log("hello");
+	%>
+</troian>
+```
+
+```html
+<troian title="This is an example" >
+	We can give any info here. It will be removed from view.
+	<%static
+		var a = 1;
+	%>
+</troian>
+
+
+<html>
+<body>
+<%
+	print("visit count :" + (a++) + "<br>");
+%>
+</body>
+</html>
+```
+
+##### compiled option tag (debrecated in 1.0.5, use success)
 ```html
 <troian params="title" compiled="console.log('im now compiled')">
 	We can give any info here. It will be removed from view.
