@@ -1,5 +1,4 @@
 # Troian
-Fast Javascript based template manager
 
 ### How can i install?
 	npm install troian
@@ -13,7 +12,7 @@ Fast Javascript based template manager
 ### Cons
 * When you do something stupid, It will not help you :(
 
-### How can i use this sh*t
+### How can i use this
 ```javascript
 var template = require('troian').directory(__dirname + '/views/');
 ```
@@ -24,12 +23,12 @@ template.index();
 `index` is actually file name without `.troian`. And we writed parantheses for function calling. Compiling process will return as a function.
 If we write some params on it; we can get it from index.troian file as down below
 
-##### app.js
+###### app.js
 ```javascript
 template.index(1, "hello");
 ```
 
-##### views/index.troian
+###### views/index.troian
 ```javascript
 <troian params="number, text">Info or blank .. This text will removed</troian>
 <%
@@ -44,7 +43,7 @@ template.index(1, "hello");
 ```
 
 ### Express Example
-##### app.js
+###### app.js
 ```javascript
 var express = require('express');
 var troian = require('troian');
@@ -61,11 +60,11 @@ app.listen(80, function() {
 });
 ```
 
-##### views/index.troian
+###### views/index.troian
 ```html
 <troian title="This is an example">
 	We can give any info here. It will be removed from view.
-	This is main page. Everything comes from this f*g.
+	This is main page. Everything comes from this
 </troian>
 <%
 	var header = template.header(title);
@@ -100,7 +99,7 @@ app.listen(80, function() {
 </head>
 ```
 
-### Other awesome features :D
+### Other awesome features
 
 ##### success option tag and failed option tag
 This option tags can be used as understanding views compiled successfuly or not. 
@@ -158,13 +157,13 @@ You can define static operations in troian tag.
 
 ##### own schema
 If you want to do some special addon or some feature that effects every page, you just simply define own schema.
-app.js
+###### app.js
 ```javascript
 troian.schema(__dirname + '/my.schema');
 var template = troian.directory(__dirname + '/views/');
 ```
 
-my.schema
+###### my.schema
 ```javascript
 (function(#parameter) {
 	var p = arguments;
@@ -223,13 +222,4 @@ my.schema
 
 <!-- Rendering every request -->
 <%(html.a("/link", "This is a link"))%>
-```
-
-
-
-##### compiled option tag (debrecated in 1.0.5, use success)
-```html
-<troian params="title" compiled="console.log('im now compiled')">
-	We can give any info here. It will be removed from view.
-</troian>
 ```
