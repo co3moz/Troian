@@ -1,0 +1,23 @@
+{
+  "name": "troian",
+  "description": "fast epic template engine",
+  "version": "1.0.10",
+  "author": {
+    "name": "co3moz",
+    "email": "co3moz@gmail.com"
+  },
+  "license": "MIT",
+  "keywords": [
+    "troian",
+    "light",
+    "weight",
+    "template",
+    "engine",
+    "fast"
+  ],
+  "main": "libs/troian.js",
+  "repository": { 
+    "type": "git",
+    "url": "https://github.com/co3moz/Troian.git"
+  }
+}

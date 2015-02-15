@@ -156,6 +156,77 @@ You can define static operations in troian tag.
 </html>
 ```
 
+##### own schema
+If you want to do some special addon or some feature that effects every page, you just simply define own schema.
+app.js
+```javascript
+troian.schema(__dirname + '/my.schema');
+var template = troian.directory(__dirname + '/views/');
+```
+
+my.schema
+```javascript
+(function(#parameter) {
+	var p = arguments;
+
+	var _$='';
+
+	function print(w) {
+		_$ += w;
+	}
+
+	function hello() {
+		return "hi :)";
+	}
+
+	#thecode
+
+	return _$;
+});
+```
+
+***note: in schema you must define print function..***
+
+##### html tags
+```html
+<troian>
+	We can give any info here. It will be removed from view.
+	<%static
+		var mydiv = html.tag("div", {
+			id: "mydiv",
+			class: "hello",
+			style: {
+				color: "red",
+				font_size: "12pt"
+			}
+		});
+
+		var img = html.img("/hello.png");
+
+		var handbyimg = html.tage("img", {
+			src: "/hello.png"
+		});
+
+		var biggerbrother = html.tag("div", {
+			class: "biggerbrother",
+			style: {
+				width: "20px",
+				height: "20px"
+			}
+		}, mydiv + img);
+
+		var withoutoptions = html.tag("div", mydiv + img);
+	%>
+</troian>
+<!-- Only rendered ones -->
+<%(biggerbrother)%>
+
+<!-- Rendering every request -->
+<%(html.a("/link", "This is a link"))%>
+```
+
+
+
 ##### compiled option tag (debrecated in 1.0.5, use success)
 ```html
 <troian params="title" compiled="console.log('im now compiled')">

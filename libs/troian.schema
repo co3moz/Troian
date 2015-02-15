@@ -1,0 +1,15 @@
+(function(#parameter) {
+	var p = arguments;
+	var html = module.exports.html;
+	var render = module.exports.render;
+
+	var _$='';
+
+	function print(w) {
+		_$ += w;
+	}
+
+	#thecode
+
+	return _$;
+});
