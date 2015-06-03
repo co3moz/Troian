@@ -18,8 +18,8 @@ var schema = String(fs.readFileSync(__dirname + "/troian.schema"));
     sys.g = "";
     sys.parameter = "f, s";
 
-    var html = module.exports.html;
-    var render = module.exports.render;
+    var html = require("./html.js");
+    var render = module.exports;
 
     // if troian tag exists do some magic
     var r;
@@ -32,7 +32,7 @@ var schema = String(fs.readFileSync(__dirname + "/troian.schema"));
 
       // finds options in troian tag
       while (temp = optreg.exec(r[1])) {
-        // crlears spaces from option tag
+        // clears spaces from option tag
         var tag = temp[1].replace(spaces, '');
 
         // collects setting data
@@ -63,7 +63,10 @@ var schema = String(fs.readFileSync(__dirname + "/troian.schema"));
       var staticTemp = r[2].split(staticReg);
       for (var i = 1; i < staticTemp.length; i += 2) {
         if (staticTemp[i] != undefined) {
-          eval(staticTemp[i]);
+          // delay for loading issues
+          setTimeout(function() {
+            eval(staticTemp[i]);
+          }, 2000);
         }
       }
 

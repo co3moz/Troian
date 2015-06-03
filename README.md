@@ -13,12 +13,15 @@
 * When you do something stupid, It will not help you :(
 
 ### How can i use this
+Example project can be found at [here](https://github.com/co3moz/Troian-Example/)
+
 ```javascript
 var template = require('troian').directory(__dirname + '/views/');
 ```
 Create variable like this. This will load every files on views folder. Then compiles each of them. If this files change during development, system will re-compile file automaticly. 
 ```javascript
 template.index();
+// template./*filename*/(/*parameters*/);
 ```
 `index` is actually file name without `.troian`. And we writed parantheses for function calling. Compiling process will return as a function.
 If we write some params on it; we can get it from index.troian file as down below
