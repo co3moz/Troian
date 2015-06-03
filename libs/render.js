@@ -64,8 +64,9 @@ var schema = String(fs.readFileSync(__dirname + "/troian.schema"));
       for (var i = 1; i < staticTemp.length; i += 2) {
         if (staticTemp[i] != undefined) {
           // delay for loading issues
+          var temp = staticTemp[i];
           setTimeout(function() {
-            eval(staticTemp[i]);
+            eval(temp);
           }, 2000);
         }
       }
