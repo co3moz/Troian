@@ -1,14 +1,14 @@
 /**
  * HTML generators
  */
-!function() {
+!function () {
   module.exports = {
     tag: function (name, option, text) {
       text || (text = "");
 
       var type = typeof option;
       if (type == "object") {
-        return ("<" + name + " " + module.exports.html.option(option) + ">" + text + "</" + name + ">");
+        return ("<" + name + " " + module.exports.option(option) + ">" + text + "</" + name + ">");
       } else if (type == "string") {
         return ("<" + name + ">" + option + "</" + name + ">");
       }
@@ -17,7 +17,7 @@
     tage: function (name, option) {
       var type = typeof option;
       if (type == "object") {
-        return ("<" + name + " " + module.exports.html.option(option) + ">");
+        return ("<" + name + " " + module.exports.option(option) + ">");
       } else {
         return ("<" + name + ">");
       }
@@ -38,14 +38,14 @@
         option = {};
       }
 
-      return module.exports.html.tag("div", option, text);
+      return module.exports.tag("div", option, text);
     },
 
     img: function (src, option) {
       option || (option = {});
 
       option.src = src;
-      return module.exports.html.tage("img", option);
+      return module.exports.tage("img", option);
     },
 
     option: function (obj) {
@@ -54,7 +54,7 @@
 
       for (i in obj) {
         if (i == "style") {
-          temp += i + "=\"" + module.exports.html.style(obj[i]) + "\" ";
+          temp += i + "=\"" + module.exports.style(obj[i]) + "\" ";
         } else {
           temp += i + "=\"" + obj[i] + "\" ";
         }

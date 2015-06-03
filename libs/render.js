@@ -1,15 +1,18 @@
+var fs = require('fs');
+var schema = String(fs.readFileSync(__dirname + "/troian.schema"));
+
 /**
  * Renders file
  * @param location Location of file
  * @param sourcehandle control source out of troian
  * @param template which template system will be used
  */
-!function() {
-  module.exports = function(location, sourcehandle, template) {
+!function () {
+  module.exports = function (location, sourcehandle, template) {
     var sys = {};
     sys.info = {};
 
-    sys.s = new String(fs.readFileSync(location + ".troian"));
+    sys.s = String(fs.readFileSync(location + ".troian"));
     sys.s = sys.s.replace(/\<\%\(/g, '<% print(');
 
     sys.g = "";
@@ -30,7 +33,7 @@
       // finds options in troian tag
       while (temp = optreg.exec(r[1])) {
         // crlears spaces from option tag
-        var tag = temp[1].replace(spaces,'');
+        var tag = temp[1].replace(spaces, '');
 
         // collects setting data
         var data = temp[2].replace(/«/g, "\\\"").replace(/»/g, "\\\'");
@@ -58,7 +61,7 @@
       //static rendering
       var staticReg = /<%static|%>/g;
       var staticTemp = r[2].split(staticReg);
-      for (var i = 1;i<staticTemp.length;i+=2) {
+      for (var i = 1; i < staticTemp.length; i += 2) {
         if (staticTemp[i] != undefined) {
           eval(staticTemp[i]);
         }
@@ -71,10 +74,10 @@
     sys.s = sys.s.split(/\<\%|\%\>/g);
 
     // for each do some math
-    for (var i = 0;i<sys.s.length;i++) {
+    for (var i = 0; i < sys.s.length; i++) {
       // first one must be text
       if (sys.s[i] != undefined) {
-        sys.g += "print(\"" + sys.s[i].replace(/\\/g,"\\\\").replace(/\"/g, '\\\"').replace(/\r\n|\n|\r/g, '\\n') + "\");\n";
+        sys.g += "print(\"" + sys.s[i].replace(/\\/g, "\\\\").replace(/\"/g, '\\\"').replace(/\r\n|\n|\r/g, '\\n') + "\");\n";
       }
 
       i++;
@@ -99,23 +102,25 @@
     try {
       var f = eval(sys.g);
 
-      if ((function() {
+      if ((function () {
           eval(sys.info.success || "");
         })(location) == false) {
         process.exit(0);
       }
 
       return f;
-    } catch(e) {
+    } catch (e) {
       e = "[error] COMPILE FAILTURE!  " + e;
       console.log(e);
 
-      if ((function() {
+      if ((function () {
           eval(sys.info.failed || "");
         })(location) == false) {
         process.exit(0);
       }
-      return (function() { return e; });
+      return (function () {
+        return e;
+      });
     }
   };
 }();

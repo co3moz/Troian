@@ -1,21 +1,27 @@
+var recursive = require('recursive-readdir-sync');
+var fs = require('fs');
+var render = require("./render.js");
+
 /**
  * Renders directory
  * @param location Location of file
  * @param sourcehandle control source out of troian
  * @param ref which template system will be used
  */
-!function() {
-  module.exports = function(location, sourcehandle, ref) {
+!function () {
+  module.exports = function (location, sourcehandle, ref) {
     ref || (ref = {});
 
     var fs = require("fs");
 
     // read dir
-    var dir = fs.readdirSync(location);
+    var dir = recursive(location);
 
-    // for every file compile them
+    location = location.replace(/\\/g, '/');
+
     for (file in dir) {
-      var t = dir[file].split(".");
+      var x = dir[file].replace(/\\/g, '/').split(location)[1];
+      var t = x.split(".");
       // if file is not troian, dont compile..
       if (t[t.length - 1] != "troian") {
         continue;
@@ -24,7 +30,16 @@
       t.pop();
       t = t.join(".");
 
-      ref[t] = module.exports.render(location + t, sourcehandle, ref);
+      if (t.indexOf('/') != -1) {
+        var sp = t.split('/');
+        if (ref[sp[0]] == undefined) {
+          ref[sp[0]] = {};
+        }
+
+        ref[sp[0]][sp[1]] = render(location + t, sourcehandle, ref);
+      } else {
+        ref[t] = render(location + t, sourcehandle, ref);
+      }
     }
 
     var trigger = {};
@@ -37,7 +52,7 @@
             trigger = null;
           }
           // this guy makes bugs disappear. mostly caused by unstable fs.watch function.
-          trigger = setTimeout(function() {
+          trigger = setTimeout(function () {
             var t = filename.split(".");
             if (t[t.length - 1] != "troian") {
               return;
@@ -46,7 +61,16 @@
             t.pop();
             t = t.join(".");
 
-            ref[t] = module.exports.render(location + t, sourcehandle, ref);
+            if (t.indexOf('/') != -1) {
+              var sp = t.split('/');
+              if (ref[sp[0]] == undefined) {
+                ref[sp[0]] = {};
+              }
+
+              ref[sp[0]][sp[1]] = render(location + t, sourcehandle, ref);
+            } else {
+              ref[t] = render(location + t, sourcehandle, ref);
+            }
           }, 10);
         }
       }
