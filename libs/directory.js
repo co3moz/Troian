@@ -1,6 +1,8 @@
 var recursive = require('recursive-readdir-sync');
+var watch = require('fs-watch-tree').watchTree;
 var fs = require('fs');
 var render = require("./render.js");
+var utility = require("./utility.js");
 
 /**
  * Renders directory
@@ -30,21 +32,12 @@ var render = require("./render.js");
       t.pop();
       t = t.join(".");
 
-      if (t.indexOf('/') != -1) {
-        var sp = t.split('/');
-        if (ref[sp[0]] == undefined) {
-          ref[sp[0]] = {};
-        }
-
-        ref[sp[0]][sp[1]] = render(location + t, sourcehandle, ref);
-      } else {
-        ref[t] = render(location + t, sourcehandle, ref);
-      }
+      utility.linkToObject(ref, t, render(location + t, sourcehandle, ref));
     }
 
-    var trigger = {};
+    var trigger = null;
     // watching files changed...
-    fs.watch(location, function (event, filename) {
+    watch(location, function (event, filename) {
       if (event == "change") {
         if (filename) {
           if (trigger != null) {
@@ -61,16 +54,8 @@ var render = require("./render.js");
             t.pop();
             t = t.join(".");
 
-            if (t.indexOf('/') != -1) {
-              var sp = t.split('/');
-              if (ref[sp[0]] == undefined) {
-                ref[sp[0]] = {};
-              }
 
-              ref[sp[0]][sp[1]] = render(location + t, sourcehandle, ref);
-            } else {
-              ref[t] = render(location + t, sourcehandle, ref);
-            }
+            utility.linkToObject(ref, t, render(location + t, sourcehandle, ref));
           }, 10);
         }
       }
