@@ -10,7 +10,6 @@ var schema = String(fs.readFileSync(__dirname + "/troian.schema"));
 !function () {
   module.exports = function (location, sourcehandle, template) {
     var sys = {};
-    sys.info = {};
 
     sys.s = String(fs.readFileSync(location + ".troian"));
     sys.s = sys.s.replace(/\<\%\+\(/g, '<%(template.');
@@ -42,16 +41,6 @@ var schema = String(fs.readFileSync(__dirname + "/troian.schema"));
         // if params option tag  used replace f, s default parameters as we give
         if (tag == "params") {
           sys.parameter = data;
-          continue;
-        }
-
-        // if success or failed option tags used then fill sys.info
-        if (tag == "success" || tag == "failed") {
-          if (sys.info[tag]) {
-            sys.info[tag] += data + "\n";
-          } else {
-            sys.info[tag] = data + "\n";
-          }
           continue;
         }
 
@@ -101,24 +90,11 @@ var schema = String(fs.readFileSync(__dirname + "/troian.schema"));
 
     // success or failed checking..
     try {
-      var f = eval(sys.g);
-
-      if ((function () {
-          eval(sys.info.success || "");
-        })(location) == false) {
-        process.exit(0);
-      }
-
-      return f;
+      return eval(sys.g);
     } catch (e) {
       e = "[error] COMPILE FAILTURE!  " + e;
       console.log(e);
 
-      if ((function () {
-          eval(sys.info.failed || "");
-        })(location) == false) {
-        process.exit(0);
-      }
       return (function () {
         return e;
       });
