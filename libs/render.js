@@ -13,6 +13,7 @@ var schema = String(fs.readFileSync(__dirname + "/troian.schema"));
     sys.info = {};
 
     sys.s = String(fs.readFileSync(location + ".troian"));
+    sys.s = sys.s.replace(/\<\%\+\(/g, '<%(template.');
     sys.s = sys.s.replace(/\<\%\(/g, '<% print(');
 
     sys.g = "";
