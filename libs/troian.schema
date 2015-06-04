@@ -1,7 +1,7 @@
+var html = require("./html");
+
 (function(#parameter) {
 	var p = arguments;
-	var html = module.exports.html;
-	var render = module.exports.render;
 
 	var _$='';
 

@@ -3,10 +3,6 @@ Troian
 
 Another awesome template engine. It's small and effective to use. It really has a big potential.
 
-Index
---------------
-[TOC]
-
 ----------
 
 Install
@@ -72,7 +68,7 @@ template.a.b.c.d(); // renders /views/a/b/c/d.troian
 ```
 ### Template files
 Template files designed as down below. troian tag are not required but it's highly recommended. You can give information inside of tag.
-```ejs
+```html
 <troian>
 	Info
 </troian>
@@ -81,7 +77,7 @@ Template files designed as down below. troian tag are not required but it's high
 
 ### Code tags
 If you want to specify some code, you should put it between `<%` and `%>` tags.
-```ejs
+```html
 <troian>
 	Hello this is code tags example
 </troian>
@@ -90,7 +86,7 @@ If you want to specify some code, you should put it between `<%` and `%>` tags.
 %>
 ```
 if you want to print some thing on screen simply use `print` function
-```ejs
+```html
 <troian>
 	Hello this is code tags example
 </troian>
@@ -100,7 +96,7 @@ if you want to print some thing on screen simply use `print` function
 %>
 ```
 also you can use `<%(` and `)%>` tags too.
-```ejs
+```html
 <troian>
 	Hello this is code tags example
 </troian>
@@ -119,24 +115,33 @@ var template = troian.directory(__dirname + '/views/');
 template.index(5);
 ```
 
-```ejs
+```html
 <troian params="count">
 	count will be 5 and print 5
 </troian>
 <%(count)%>
 ```
 
+If you want to more params you simply do like down below
+```html
+<troian params="count, a, b, c">
+	count will be 5 and print 5
+</troian>
+<%(count)%>
+```
+
 Another big thing about parametric template files, you can define statics.
-```ejs
+```html
 <troian count="5" my_variable="hello">
 	count will be 5 and print 5
 </troian>
 <%(count)%>
 ```
 
+
 ### Static field
 Static field only runs one time. You can use this field for define unchangeable things or global things... It can be really usefull. As you can see down below, we just define count in static field and we simple do `count++` every request. 
-```ejs
+```html
 <troian>
 	This view just counts.
 	<%static
@@ -150,7 +155,7 @@ Static field only runs one time. You can use this field for define unchangeable 
 if we want to include some other template we can simply use `<%+(` and `%)>` inside we just give file name and paranthesis. this parathesis needing because all templates in troian are acting like function and has parameters.
 
 index.troian
-```ejs
+```html
 <troian>
 	This view is parent.
 </troian>
@@ -158,7 +163,7 @@ index.troian
 ```
 
 child.troian
-```ejs
+```html
 <troian>
 	This view is chield.
 </troian>
@@ -166,14 +171,14 @@ Hi master.
 ```
 
 result 
-```ejs
+```html
 Hi master.
 ```
 another example
 
 -------------
 index.troian
-```ejs
+```html
 <troian>
 	This view is parent.
 </troian>
@@ -181,7 +186,7 @@ parent:<%+(child(15))%>
 ```
 
 child.troian
-```ejs
+```html
 <troian params="a">
 	This view is chield.
 </troian>
@@ -189,13 +194,13 @@ child:<%(a)%>
 ```
 
 result 
-```ejs
+```html
 parent:child:15
 ```
 
 ### Template Including with Code
 you can use template object for render another template.
-```ejs
+```html
 <troian>
 	This view is template including with code
 </troian>
@@ -207,14 +212,17 @@ you can use template object for render another template.
 
 ### Standard HTML codes for use
 we developed simply html generator.. You can use them too.
-```ejs
+
+> Note: HTML Codes are in beta for now. They can be unstable sometime. Please if you had any trouble, contact to us.
+
+```html
 <troian>
 	This view is Standard HTML codes for use
 </troian>
 <%(html.a("/link", "This is a link"))%>
 ```
 or
-```ejs
+```html
 <troian>
 	This view is Standard HTML codes for use
 	<%static
@@ -223,5 +231,51 @@ or
 </troian>
 <%
 	print(link);
+%>
+```
+
+### HTML Options
+
+HTML Options can be setted as down below.
+
+```html
+<troian>
+	This view is HTML Options
+	<%static
+		var link = html.a("/link", {
+		    class: "linkClass", 
+		    style: {
+		        background_color: "red"
+		    }
+		},"This is a link");
+	%>
+</troian>
+<%
+	print(link);
+%>
+```
+
+```html
+<troian>
+	This view is HTML Options
+	<%static
+	    var link = html.a("/link", {
+            class: "linkClass", 
+            style: {
+                background_color: "red"
+            }
+        }, "This is a link");
+        	
+		var div = html.tag("div", {
+		    class: "divClass", 
+		    style: {
+		        background_color: "black",
+		        border: "1px solid red"
+		    }
+		}, link);
+	%>
+</troian>
+<%
+	print(div);
 %>
 ```

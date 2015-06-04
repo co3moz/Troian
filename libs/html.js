@@ -29,7 +29,11 @@
         option = {href: href};
       }
 
-      return module.exports.html.tag("a", option, text);
+      if(typeof option == "object") {
+        option.href = href;
+      }
+
+      return module.exports.tag("a", option, text);
     },
 
     div: function (option, text) {
