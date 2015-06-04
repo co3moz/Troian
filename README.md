@@ -47,7 +47,10 @@ Examples
 
 You can find my example project at [here](https://github.com/co3moz/Troian-Example)
 
-### Using it
+Features
+-------------------
+
+### Easy to Start
 
 First you need to require troian. Call it with directory function. This function reads directory and finds recursively troian files.  directory function returns object that has all files
 ```javascript
